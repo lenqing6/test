@@ -7,7 +7,7 @@ import (
 
 func main() {
 	// 创建一个默认的路由引擎
-	q := ""
+	q := "1"
 	fmt.Println(q)
 	r := gin.Default()
 	// 当客户端通过get方式请求/hello时,会执行后面的匿名函数
