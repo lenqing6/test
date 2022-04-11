@@ -20,4 +20,6 @@ func process(ctx context.Context) {
 	} else {
 		fmt.Printf("process over. no trace_id\n")
 	}
+	strId := "完成各種牛牛"
+	fmt.Println(strId)
 }
