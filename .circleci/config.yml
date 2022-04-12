@@ -6,6 +6,7 @@ jobs:
       image: ubuntu-2004:202111-02
     resource_class: medium
     steps:
+      - checkout
       - run:
           name: check-tranlate-commit-by-ssh
           command: |
