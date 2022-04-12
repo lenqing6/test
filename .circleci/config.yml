@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   check-tranlate-commit:
     machine:
-       image: ubuntu-2004:202111-02
+      image: ubuntu-2004:202111-02
     resource_class: medium
     steps:
       - run:
@@ -33,4 +33,3 @@ workflows:
           filters:
             branches:
               only: main # only deploy on the main branch
-       
