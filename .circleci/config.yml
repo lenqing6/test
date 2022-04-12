@@ -15,7 +15,7 @@ workflows:
   version: 2.1
   build-and-deploy:
     jobs:
-      - check-tranlate-commit:
+      - demo-work:
           requires:
             - check-tranlate-commit # only deploy once build job has completed
           filters:
