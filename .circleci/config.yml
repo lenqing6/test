@@ -17,6 +17,8 @@ jobs:
             strPOEditor="Update.*\(POEditor.com\)"
             if [[ $strmmsg =~ $strPOEditor ]]
             then
+
+              exit 2
               git fetch origin
               strwk=$(for branch in `git branch -r | grep -v HEAD | grep '[0-9]*.wk[0-9]*$'`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r | head -1)
               strwk=${strwk#*/}
@@ -24,6 +26,8 @@ jobs:
               git cherry-pick $strmid
               git push -q https://${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}@github.com/giantswarm/docs.git 
               git checkout main
+
+
             else
               echo "非POEditor代码提交"
             fi
