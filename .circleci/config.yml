@@ -1,0 +1,35 @@
+version: 2.1
+
+jobs:
+  check-tranlate-commit:
+    machine:
+      image: ubuntu-2004:202111-02
+    resource_class: medium
+    steps:
+      - run:
+          name: check-tranlate-commit-by-ssh
+          command: |
+            strmid=$(git rev-parse HEAD)
+            strmmsg=$(git log --pretty=format:"%s" $strmid -1)
+            strPOEditor="Update.*\(POEditor.com\)"
+            if [[ $strmmsg =~ $strPOEditor ]]
+            then
+              git fetch origin
+              strwk=$(for branch in `git branch -r | grep -v HEAD | grep '[0-9]*.wk[0-9]*$'`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r | head -1)
+              strwk=${strwk#*/}
+              git checkout $strwk
+              git cherry-pick $strmid
+              git push
+              git checkout main
+            else
+              echo "非POEditor代码提交"
+            fi
+
+workflows:
+  version: 2.1
+  build-and-deploy:
+    jobs:
+      - check-tranlate-commit:
+          filters:
+            branches:
+              only: main # only deploy on the main branch
