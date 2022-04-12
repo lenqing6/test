@@ -1,9 +1,10 @@
-version: 2
+version: 2.1
 
 jobs:
   check-tranlate-commit:
     machine:
-      enabled: true
+       image: ubuntu-2004:202111-02
+    resource_class: medium
     steps:
       - run:
           name: check-tranlate-commit-by-ssh
@@ -11,7 +12,7 @@ jobs:
             echo "todo"
 
 workflows:
-  version: 2
+  version: 2.1
   build-and-deploy:
     jobs:
       - check-tranlate-commit:
