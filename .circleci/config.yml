@@ -17,6 +17,8 @@ jobs:
             strPOEditor="Update.*\(POEditor.com\)"
             if [[ $strmmsg =~ $strPOEditor ]]
             then
+              if git log strmid  --stat -1 | grep -q "file changed" ;  then  exit 2
+              fi
               git fetch origin
               strwk=$(for branch in `git branch -r | grep -v HEAD | grep '[0-9]*.wk[0-9]*$'`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r | head -1)
               strwk=${strwk#*/}
@@ -24,9 +26,22 @@ jobs:
               git cherry-pick $strmid
               git push -q https://${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}@github.com/giantswarm/docs.git 
               git checkout main
+
+
             else
               echo "非POEditor代码提交"
             fi
+  demo_build:
+    machine:
+      image: ubuntu-2004:202111-02
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: demo_build 
+          # 如果 job check-tranlate-commit执行完成，但是检测到空的翻译commit，不进行cheery pick 以及后续ci的build
+          command: |
+            echo "should not in when translate commit is empty!"
 
 workflows:
   version: 2.1
@@ -36,3 +51,10 @@ workflows:
           filters:
             branches:
               only: main # only deploy on the main branch
+      - demo_build:
+          requires:
+            - check-tranlate-commit
+          filters:
+            branches:
+              only: main # only deploy on the main branch
+      
