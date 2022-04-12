@@ -10,7 +10,7 @@ jobs:
           name: check-tranlate-commit-by-ssh
           command: |
             strmid=$(git rev-parse HEAD)
-            strmmsg=$(git log --pretty=format:“%s” $strmid -1)
+            strmmsg=$(git log --pretty=format:"%s" $strmid -1)
             strPOEditor="Update.*\(POEditor.com\)"
             if [[ $strmmsg =~ $strPOEditor ]]
             then
