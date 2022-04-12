@@ -22,7 +22,7 @@ jobs:
               strwk=${strwk#*/}
               git checkout $strwk
               git cherry-pick $strmid
-              git push 
+              git push -q https://${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}@github.com/giantswarm/docs.git 
               git checkout main
             else
               echo "非POEditor代码提交"
