@@ -6,11 +6,14 @@ jobs:
       image: ubuntu-2004:202111-02
     resource_class: medium
     steps:
+      - checkout
       - run:
           name: check-tranlate-commit-by-ssh
           command: |
+            git config --global user.email "sam.li@sparticle.com"
+            git config --global user.name "sam li"
             strmid=$(git rev-parse HEAD)
-            strmmsg=$(git log --pretty=format:“%s” $strmid -1)
+            strmmsg=$(git log --pretty=format:"%s" $strmid -1)
             strPOEditor="Update.*\(POEditor.com\)"
             if [[ $strmmsg =~ $strPOEditor ]]
             then
@@ -19,7 +22,7 @@ jobs:
               strwk=${strwk#*/}
               git checkout $strwk
               git cherry-pick $strmid
-              git push
+              git push 
               git checkout main
             else
               echo "非POEditor代码提交"
