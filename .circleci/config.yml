@@ -17,7 +17,7 @@ jobs:
             then
               git fetch origin
               strwk=$(for branch in `git branch -r | grep -v HEAD | grep '[0-9]*.wk[0-9]*$'`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r | head -1)
-              strwk=${strwk#*/}
+              strwk=${strwk#*ago}
               git checkout $strwk
               git cherry-pick $strmid
               git push
