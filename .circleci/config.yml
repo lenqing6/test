@@ -1,23 +1,23 @@
 version: 2
 
- jobs:
-   check-tranlate-commit:
-     machine:
-       enabled: true
-     steps:
-       - run:
-           name: check-tranlate-commit-by-ssh
-           command: |
-             echo "todo"
+jobs:
+  check-tranlate-commit:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: check-tranlate-commit-by-ssh
+          command: |
+            echo "todo"
 
- workflows:
-   version: 2
-   build-and-deploy:
-     jobs:
-       - check-tranlate-commit:
-           requires:
-             - check-tranlate-commit # only deploy once build job has completed
-           filters:
-             branches:
-               only: main # only deploy on the main branch
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - check-tranlate-commit:
+          requires:
+            - check-tranlate-commit # only deploy once build job has completed
+          filters:
+            branches:
+              only: main # only deploy on the main branch
        
