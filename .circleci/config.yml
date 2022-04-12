@@ -13,7 +13,7 @@ jobs:
             git config --global user.email "sam.li@sparticle.com"
             git config --global user.name "sam li"
             strmid=$(git rev-parse HEAD)
-            if git log 9b8bebd422fd253406996f06a716f22e11e66290 --stat -1 | grep -q "file changed" ;  then  exit 2
+            if git log 9b8bebd422fd253406996f06a716f22e11e66290 --stat -1 | grep -q "files changed" ;  then  exit 2
               fi
             strmmsg=$(git log --pretty=format:"%s" $strmid -1)
             strPOEditor="Update.*\(POEditor.com\)"
