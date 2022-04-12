@@ -1,0 +1,12 @@
+enabled: true
+path: /usr/local
+url: http://www.baidu.com/
+host: localhost:3306
+user: root
+pwd: 123456
+dbname: test
+修改了配置文件
+测试 cherry pick 
+测试一下
+ceshi
+ceshi
