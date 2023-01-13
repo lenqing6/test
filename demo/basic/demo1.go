@@ -19,7 +19,7 @@ func main() {
 		err := c.ShouldBind(&user)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
+				"errorasdsadsadad": err.Error(),
 			})
 		} else {
 			c.JSON(http.StatusOK, user)
